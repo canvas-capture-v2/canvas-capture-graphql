@@ -1,0 +1,22 @@
+{
+  "name": "canvas-capture-graphql",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "@prisma/client": "^6.7.0",
+    "cors": "^2.8.5",
+    "express": "^5.1.0",
+    "graphql": "^16.11.0",
+    "graphql-http": "^1.22.4"
+  },
+  "devDependencies": {
+    "@types/express": "^5.0.1",
+    "@types/graphql": "^14.2.3",
+    "prisma": "^6.7.0",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.8.3"
+  }
+}

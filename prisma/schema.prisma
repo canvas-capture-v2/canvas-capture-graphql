@@ -1,0 +1,236 @@
+datasource db {
+    provider = "postgresql"
+    url = "postgresql://billyyork:password@localhost:5432/canvas_capture?schema=front_end"
+}
+
+generator client {
+    provider = "prisma-client-js"
+    output = "app/generated/prisma/client"
+}
+
+model Course {
+    id                  Int @id
+    name                String?
+    course_code         String?
+    start_at            DateTime?
+    end_at              DateTime?
+    total_students      Int?
+    syllabus_body       String?
+    public_description  String?
+    assignment_groups   AssignmentGroup[]
+    date_statistics     DateStatistics? @relation(fields: [date_statistics_id], references: [id])
+    date_statistics_id  Int? @unique
+    score_statistics    ScoreStatistic? @relation(fields: [score_statistics_id], references: [id])
+    score_statistics_id Int? @unique
+    points_possible     Int?
+    weight              Int?
+}
+
+model AssignmentGroup {
+    id                  Int @id
+    course              Course? @relation(fields: [course_id], references: [id])
+    course_id           Int?
+    name                String?
+    assignments         Assignment[]
+    position            Int?
+    group_weight        Float?
+    points_possible     Int?
+    score_statistics    ScoreStatistic? @relation(fields: [score_statistics_id], references: [id])
+    score_statistics_id Int? @unique
+    date_statistics     DateStatistics? @relation(fields: [date_statistics_id], references: [id])
+    date_statistics_id  Int? @unique
+}
+
+model Assignment {
+    id                        Int @id
+    name                      String?
+    description               String?
+    updated_at                DateTime?
+    due_at                    DateTime?
+    unlock_at                 DateTime?
+    course_id                 Int?
+    assignment_group          AssignmentGroup? @relation(fields: [assignment_group_id], references: [id])
+    assignment_group_id       Int
+    position                  Int?
+    points_possible           Int?
+    submission_types          String?
+    has_submitted_submissions Boolean?
+    published                 Boolean?
+    quiz_id                   Int?
+    anonymous_submissions     Boolean?
+    discussion_topic          DiscussionTopic? @relation(fields: [discussion_topic_id], references: [id])
+    discussion_topic_id       Int? @unique
+    use_rubric_for_grading    Boolean?
+    rubric_settings           Rubric? @relation(fields: [rubric_settings_id], references: [id])
+    rubric_settings_id        Int? @unique
+    rubric                    RubricCriteria[]
+    allowed_attempts          Int?
+    score_statistics          ScoreStatistic? @relation(fields: [score_statistics_id], references: [id])
+    score_statistics_id       Int? @unique
+    is_quiz_assignment        Boolean?
+    submissions               Submission[]
+    low_submission            Submission? @relation(name: "low_submission", fields: [low_submission_id], references: [id])
+    low_submission_id         Int? @unique
+    median_submission         Submission? @relation(name: "median_submission", fields: [median_submission_id], references: [id])
+    median_submission_id      Int? @unique
+    high_submission           Submission? @relation(name: "high_submission", fields: [high_submission_id], references: [id])
+    high_submission_id        Int? @unique
+    last_submission_date      DateTime?
+    last_graded_date          DateTime?
+    num_late_submissions      Int?
+    avg_submissions_per_user  Float?
+    avg_submission_time       String?
+    avg_time_to_grade         String?
+}
+
+model Submission {
+    assignment_id        Int?
+    assignment           Assignment? @relation(fields: [assignment_id], references: [id])
+    attempt              Int?
+    body                 String?
+    score                Int?
+    submitted_at         DateTime?
+    user_id              Int?
+    late                 Boolean?
+    excused              Boolean?
+    missing              Boolean?
+    late_policy_status   String?
+    anonymous_id         String?
+    id                   Int @id @default(autoincrement())
+    time_late            String?
+    time_to_grade        String?
+    submission_comments  SubmissionComment[]
+
+    low_assignment       Assignment? @relation(name: "low_submission")
+    median_assignment    Assignment? @relation(name: "median_submission")
+    high_assignment      Assignment? @relation(name: "high_submission")
+}
+
+model SubmissionComment {
+    id            Int @id
+    submission    Submission? @relation(fields: [submission_id], references: [id])
+    submission_id Int?
+    author_name   String?
+    comment       String?
+    created_at    DateTime?
+    edited_at     DateTime?
+}
+
+model DateStatistics {
+    id                              Int @id @default(autoincrement())
+    avg_num_assignments_due_per_day Float?
+    avg_time_assigned_to_due        String?
+    avg_time_last_past_due          String?
+    avg_time_last_to_grade          String?
+    avg_num_late                    Float?
+    avg_submissions                 Float?
+    course                          Course?
+    assignment_group                AssignmentGroup?
+}
+
+model ScoreStatistic {
+    id               Int @id @default(autoincrement())
+    min              Float?
+    max              Float?
+    mean             Float?
+    upper_q          Float?
+    median           Float?
+    lower_q          Float?
+    course           Course?
+    assignment_group AssignmentGroup?
+    assignment       Assignment?
+}
+
+model Rubric {
+    id                           Int @id
+    title                        String?
+    context_id                   Int?
+    context_type                 String?
+    points_possible              Int?
+    reusable                     Boolean?
+    read_only                    Boolean?
+    free_form_criterion_comments Boolean?
+    hide_score_total             Boolean?
+    data                         RubricCriteria[]
+    assessments                  RubricAssessment[]
+    associations                 RubricAssociation[]
+
+    assignment                   Assignment?
+}
+
+model RubricAssessment {
+    id                    Int @id
+    rubric                Rubric? @relation(fields: [rubric_id], references: [id])
+    rubric_id             Int?
+    rubric_association    RubricAssociation? @relation(fields: [rubric_association_id], references: [id])
+    rubric_association_id Int? @unique
+    score                 Int?
+    artifact_type         String?
+    artifact_id           Int?
+    artifact_attempt      Int?
+    assessment_type       String?
+    assessor_id           Int?
+    data                  String?
+    comments              String?
+}
+
+model RubricAssociation {
+    id                   Int @id
+    rubric               Rubric? @relation(fields: [rubric_id], references: [id])
+    rubric_id            Int?
+    association_id       Int?
+    association_type     String?
+    use_for_grading      Boolean?
+    summary_data         String?
+    purpose              String?
+    hide_score_total     Boolean?
+    hide_points          Boolean?
+    hide_outcome_results Boolean?
+    rubric_assessment    RubricAssessment?
+}
+
+model RubricCriteria {
+    points              Int?
+    id                  String @id
+    learning_outcome_id String?
+    vendor_guid         String?
+    description         String?
+    long_description    String?
+    criterion_use_range Boolean?
+    ratings             RubricRating[]
+    ignore_for_scoring  Boolean?
+    assignment          Assignment? @relation(fields: [assignment_id], references: [id])
+    assignment_id       Int?
+    rubric              Rubric? @relation(fields: [rubric_id], references: [id])
+    rubric_id           Int?
+}
+
+model RubricRating {
+    points             Int?
+    id                 String @id
+    description        String?
+    long_description   String?
+    rubric_criteria    RubricCriteria? @relation(fields: [rubric_criteria_id], references: [id])
+    rubric_criteria_id String?
+}
+
+model DiscussionTopic {
+    id                        Int @id
+    title                     String?
+    message                   String?
+    posted_at                 DateTime?
+    last_reply_at             DateTime?
+    require_initial_post      Boolean?
+    discussion_subentry_count Int?
+    assignment_id             Int
+    delayed_post_at           DateTime?
+    published                 Boolean?
+    lock_at                   DateTime?
+    locked                    Boolean?
+    user_name                 String?
+    topic_children            DiscussionTopic[] @relation(name: "topic_parentage")
+    root_topic                DiscussionTopic? @relation(name: "topic_parentage", fields: [root_topic_id], references: [id])
+    root_topic_id             Int? @unique
+    discussion_type           String?
+    assignment                Assignment?
+}
