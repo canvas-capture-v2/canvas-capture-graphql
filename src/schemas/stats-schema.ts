@@ -1,6 +1,5 @@
 
-// @ts-ignore
-import {PrismaClient} from '../prisma/app/generated/prisma/client'
+import {PrismaClient} from '../../prisma/app/generated/prisma/client/index.js'
 import {
     GraphQLFloat,
     GraphQLInputObjectType,

@@ -132,7 +132,8 @@ exports.Prisma.CourseScalarFieldEnum = {
   date_statistics_id: 'date_statistics_id',
   score_statistics_id: 'score_statistics_id',
   points_possible: 'points_possible',
-  weight: 'weight'
+  weight: 'weight',
+  user_id: 'user_id'
 };
 
 exports.Prisma.AssignmentGroupScalarFieldEnum = {

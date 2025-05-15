@@ -7,14 +7,11 @@ import {
     GraphQLSchema,
     GraphQLString
 } from "graphql";
-// @ts-ignore
-import {submission_input, submission_type} from "./submission-schema";
-// @ts-ignore
-import {score_statistics_input, score_statistics_type} from "./stats-schema";
-// @ts-ignore
-import {PrismaClient} from "../prisma/app/generated/prisma/client"
-import {rubric_criteria_input, rubric_criteria_type, rubric_input, rubric_type} from "./rubric-schema";
-import {discussion_topic_input, discussion_topic_type} from "./discussion_topic-schema";
+import {submission_input, submission_type} from "./submission-schema.js";
+import {score_statistics_input, score_statistics_type} from "./stats-schema.js";
+import {PrismaClient} from "../../prisma/app/generated/prisma/client/index.js"
+import {rubric_criteria_input, rubric_criteria_type, rubric_input, rubric_type} from "./rubric-schema.js";
+import {discussion_topic_input, discussion_topic_type} from "./discussion_topic-schema.js";
 
 const prisma = new PrismaClient()
 

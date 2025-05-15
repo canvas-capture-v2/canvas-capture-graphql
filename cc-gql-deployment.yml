@@ -1,0 +1,36 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cc-gql-deployment
+  labels:
+    app: cc-gql
+spec:
+  replicas: 2
+  selector:
+    matchLabels:
+      app: cc-gql
+  template:
+    metadata:
+      labels:
+        app: cc-gql
+    spec:
+      containers:
+        - name: cc-gql
+          image: yorkwmsoe/cc-gql
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 4000
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: cc-gql-service
+spec:
+  ports:
+  - port: 4000
+    protocol: TCP
+    targetPort: 4000
+  selector:
+    app: cc-gql
+  type: LoadBalancer

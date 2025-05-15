@@ -12,10 +12,9 @@ import {
     date_statistics_type,
     score_statistics_input,
     score_statistics_type
-} from "./stats-schema";
-import {assignment_group_input, assignment_group_type} from "./assignment_group-schema";
-// @ts-ignore
-import {PrismaClient} from "../prisma/app/generated/prisma/client"
+} from "./stats-schema.js";
+import {assignment_group_input, assignment_group_type} from "./assignment_group-schema.js";
+import {PrismaClient} from "../../prisma/app/generated/prisma/client/index.js"
 
 const prisma = new PrismaClient()
 
@@ -34,7 +33,8 @@ export const course_type = new GraphQLObjectType({
         date_statistics: {type: date_statistics_type},
         score_statistics: {type: score_statistics_type},
         points_possible: {type: GraphQLInt},
-        weight: {type: GraphQLFloat}
+        weight: {type: GraphQLFloat},
+        user_id: {type: GraphQLInt}
     }
 })
 
@@ -53,7 +53,8 @@ export const course_input = new GraphQLInputObjectType({
         date_statistics: {type: date_statistics_input},
         score_statistics: {type: score_statistics_input},
         points_possible: {type: GraphQLInt},
-        weight: {type: GraphQLFloat}
+        weight: {type: GraphQLFloat},
+        user_id: {type: GraphQLInt}
     }
 })
 
@@ -63,13 +64,15 @@ export const course_query = new GraphQLObjectType({
         course: {
             type: course_type,
             args: {
+                user_id: {type: GraphQLInt},
                 id: {type: GraphQLInt},
                 assignment_group_ids: {type: new GraphQLList(GraphQLInt)},
                 assignment_ids: {type: new GraphQLList(GraphQLInt)}
             },
-            resolve: (_, {id, assignment_group_ids, assignment_ids}) => {
+            resolve: (_, {user_id, id, assignment_group_ids, assignment_ids}) => {
                 return prisma.course.findUnique({
                     where: {
+                        user_id: user_id,
                         id: id
                     },
                     include: {
@@ -103,13 +106,15 @@ export const course_query = new GraphQLObjectType({
         courses: {
             type: new GraphQLList(course_type),
             args: {
+                user_id: {type: GraphQLInt},
                 ids: {type: new GraphQLList(GraphQLInt)},
                 assignment_group_ids: {type: new GraphQLList(GraphQLInt)},
                 assignment_ids: {type: new GraphQLList(GraphQLInt)}
             },
-            resolve: (_, {ids, assignment_group_ids, assignment_ids}) => {
+            resolve: (_, {user_id, ids, assignment_group_ids, assignment_ids}) => {
                 return prisma.course.findMany({
                     where: {
+                        user_id: user_id,
                         id: {in: ids}
                     },
                     include: {
@@ -166,7 +171,8 @@ export const course_mutation = new GraphQLObjectType({
                         date_statistics: input.date_statistics,
                         score_statistics: input.score_statistics,
                         points_possible: input.points_possible,
-                        weight: input.weight
+                        weight: input.weight,
+                        user_id: input.user_id
                     }
                 })
             }
@@ -194,7 +200,8 @@ export const course_mutation = new GraphQLObjectType({
                         date_statistics: input.date_statistics,
                         score_statistics: input.score_statistics,
                         points_possible: input.points_possible,
-                        weight: input.weight
+                        weight: input.weight,
+                        user_id: input.user_id
                     }
                 })
             }

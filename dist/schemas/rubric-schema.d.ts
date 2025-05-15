@@ -1,0 +1,13 @@
+import { GraphQLEnumType, GraphQLInputObjectType, GraphQLObjectType } from "graphql";
+export declare const assessment_type_enum: GraphQLEnumType;
+export declare const rubric_association_purpose_enum: GraphQLEnumType;
+export declare const rubric_rating_type: GraphQLObjectType<any, any>;
+export declare const rubric_rating_input: GraphQLInputObjectType;
+export declare const rubric_assessment_type: GraphQLObjectType<any, any>;
+export declare const rubric_assessment_input: GraphQLInputObjectType;
+export declare const rubric_association_type: GraphQLObjectType<any, any>;
+export declare const rubric_association_input: GraphQLInputObjectType;
+export declare const rubric_criteria_type: GraphQLObjectType<any, any>;
+export declare const rubric_criteria_input: GraphQLInputObjectType;
+export declare const rubric_type: GraphQLObjectType<any, any>;
+export declare const rubric_input: GraphQLInputObjectType;

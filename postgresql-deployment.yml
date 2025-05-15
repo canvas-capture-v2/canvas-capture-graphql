@@ -1,0 +1,53 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: gql-postgresql
+  labels:
+    app: gql-db
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: gql-db
+  template:
+    metadata:
+      labels:
+        app: gql-db
+    spec:
+      containers:
+        - name: gql-postgresql
+          image: postgres
+          imagePullPolicy: Never
+          env:
+            - name: POSTGRES_USER
+              value: billyyork
+            - name: POSTGRES_DB
+              value: dev
+            - name: POSTGRES_PASSWORD
+              value: password
+          ports:
+          - containerPort: 5432
+            name: gql-db-con
+          volumeMounts:
+            - name: gql-postgres-persistent-storage
+              mountPath: /var/lib/postgres/gql
+      volumes:
+        - name: gql-postgres-persistent-storage
+          persistentVolumeClaim:
+            claimName: gql-pv-claim
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: gql-postgresql
+  labels:
+    app: gql-db
+spec:
+  ports:
+  - port: 5432
+    protocol: TCP
+    name: gql-postgresql
+  selector:
+    app: gql-db
+  type: LoadBalancer

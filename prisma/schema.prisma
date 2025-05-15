@@ -24,6 +24,7 @@ model Course {
     score_statistics_id Int? @unique
     points_possible     Int?
     weight              Int?
+    user_id             Int
 }
 
 model AssignmentGroup {

@@ -2223,6 +2223,7 @@ export namespace Prisma {
     score_statistics_id: number | null
     points_possible: number | null
     weight: number | null
+    user_id: number | null
   }
 
   export type CourseSumAggregateOutputType = {
@@ -2232,6 +2233,7 @@ export namespace Prisma {
     score_statistics_id: number | null
     points_possible: number | null
     weight: number | null
+    user_id: number | null
   }
 
   export type CourseMinAggregateOutputType = {
@@ -2247,6 +2249,7 @@ export namespace Prisma {
     score_statistics_id: number | null
     points_possible: number | null
     weight: number | null
+    user_id: number | null
   }
 
   export type CourseMaxAggregateOutputType = {
@@ -2262,6 +2265,7 @@ export namespace Prisma {
     score_statistics_id: number | null
     points_possible: number | null
     weight: number | null
+    user_id: number | null
   }
 
   export type CourseCountAggregateOutputType = {
@@ -2277,6 +2281,7 @@ export namespace Prisma {
     score_statistics_id: number
     points_possible: number
     weight: number
+    user_id: number
     _all: number
   }
 
@@ -2288,6 +2293,7 @@ export namespace Prisma {
     score_statistics_id?: true
     points_possible?: true
     weight?: true
+    user_id?: true
   }
 
   export type CourseSumAggregateInputType = {
@@ -2297,6 +2303,7 @@ export namespace Prisma {
     score_statistics_id?: true
     points_possible?: true
     weight?: true
+    user_id?: true
   }
 
   export type CourseMinAggregateInputType = {
@@ -2312,6 +2319,7 @@ export namespace Prisma {
     score_statistics_id?: true
     points_possible?: true
     weight?: true
+    user_id?: true
   }
 
   export type CourseMaxAggregateInputType = {
@@ -2327,6 +2335,7 @@ export namespace Prisma {
     score_statistics_id?: true
     points_possible?: true
     weight?: true
+    user_id?: true
   }
 
   export type CourseCountAggregateInputType = {
@@ -2342,6 +2351,7 @@ export namespace Prisma {
     score_statistics_id?: true
     points_possible?: true
     weight?: true
+    user_id?: true
     _all?: true
   }
 
@@ -2444,6 +2454,7 @@ export namespace Prisma {
     score_statistics_id: number | null
     points_possible: number | null
     weight: number | null
+    user_id: number
     _count: CourseCountAggregateOutputType | null
     _avg: CourseAvgAggregateOutputType | null
     _sum: CourseSumAggregateOutputType | null
@@ -2478,6 +2489,7 @@ export namespace Prisma {
     score_statistics_id?: boolean
     points_possible?: boolean
     weight?: boolean
+    user_id?: boolean
     assignment_groups?: boolean | Course$assignment_groupsArgs<ExtArgs>
     date_statistics?: boolean | Course$date_statisticsArgs<ExtArgs>
     score_statistics?: boolean | Course$score_statisticsArgs<ExtArgs>
@@ -2497,6 +2509,7 @@ export namespace Prisma {
     score_statistics_id?: boolean
     points_possible?: boolean
     weight?: boolean
+    user_id?: boolean
     date_statistics?: boolean | Course$date_statisticsArgs<ExtArgs>
     score_statistics?: boolean | Course$score_statisticsArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
@@ -2514,6 +2527,7 @@ export namespace Prisma {
     score_statistics_id?: boolean
     points_possible?: boolean
     weight?: boolean
+    user_id?: boolean
     date_statistics?: boolean | Course$date_statisticsArgs<ExtArgs>
     score_statistics?: boolean | Course$score_statisticsArgs<ExtArgs>
   }, ExtArgs["result"]["course"]>
@@ -2531,9 +2545,10 @@ export namespace Prisma {
     score_statistics_id?: boolean
     points_possible?: boolean
     weight?: boolean
+    user_id?: boolean
   }
 
-  export type CourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "course_code" | "start_at" | "end_at" | "total_students" | "syllabus_body" | "public_description" | "date_statistics_id" | "score_statistics_id" | "points_possible" | "weight", ExtArgs["result"]["course"]>
+  export type CourseOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "course_code" | "start_at" | "end_at" | "total_students" | "syllabus_body" | "public_description" | "date_statistics_id" | "score_statistics_id" | "points_possible" | "weight" | "user_id", ExtArgs["result"]["course"]>
   export type CourseInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     assignment_groups?: boolean | Course$assignment_groupsArgs<ExtArgs>
     date_statistics?: boolean | Course$date_statisticsArgs<ExtArgs>
@@ -2569,6 +2584,7 @@ export namespace Prisma {
       score_statistics_id: number | null
       points_possible: number | null
       weight: number | null
+      user_id: number
     }, ExtArgs["result"]["course"]>
     composites: {}
   }
@@ -3007,6 +3023,7 @@ export namespace Prisma {
     readonly score_statistics_id: FieldRef<"Course", 'Int'>
     readonly points_possible: FieldRef<"Course", 'Int'>
     readonly weight: FieldRef<"Course", 'Int'>
+    readonly user_id: FieldRef<"Course", 'Int'>
   }
     
 
@@ -18649,7 +18666,8 @@ export namespace Prisma {
     date_statistics_id: 'date_statistics_id',
     score_statistics_id: 'score_statistics_id',
     points_possible: 'points_possible',
-    weight: 'weight'
+    weight: 'weight',
+    user_id: 'user_id'
   };
 
   export type CourseScalarFieldEnum = (typeof CourseScalarFieldEnum)[keyof typeof CourseScalarFieldEnum]
@@ -18970,6 +18988,7 @@ export namespace Prisma {
     score_statistics_id?: IntNullableFilter<"Course"> | number | null
     points_possible?: IntNullableFilter<"Course"> | number | null
     weight?: IntNullableFilter<"Course"> | number | null
+    user_id?: IntFilter<"Course"> | number
     assignment_groups?: AssignmentGroupListRelationFilter
     date_statistics?: XOR<DateStatisticsNullableScalarRelationFilter, DateStatisticsWhereInput> | null
     score_statistics?: XOR<ScoreStatisticNullableScalarRelationFilter, ScoreStatisticWhereInput> | null
@@ -18988,6 +19007,7 @@ export namespace Prisma {
     score_statistics_id?: SortOrderInput | SortOrder
     points_possible?: SortOrderInput | SortOrder
     weight?: SortOrderInput | SortOrder
+    user_id?: SortOrder
     assignment_groups?: AssignmentGroupOrderByRelationAggregateInput
     date_statistics?: DateStatisticsOrderByWithRelationInput
     score_statistics?: ScoreStatisticOrderByWithRelationInput
@@ -19009,6 +19029,7 @@ export namespace Prisma {
     public_description?: StringNullableFilter<"Course"> | string | null
     points_possible?: IntNullableFilter<"Course"> | number | null
     weight?: IntNullableFilter<"Course"> | number | null
+    user_id?: IntFilter<"Course"> | number
     assignment_groups?: AssignmentGroupListRelationFilter
     date_statistics?: XOR<DateStatisticsNullableScalarRelationFilter, DateStatisticsWhereInput> | null
     score_statistics?: XOR<ScoreStatisticNullableScalarRelationFilter, ScoreStatisticWhereInput> | null
@@ -19027,6 +19048,7 @@ export namespace Prisma {
     score_statistics_id?: SortOrderInput | SortOrder
     points_possible?: SortOrderInput | SortOrder
     weight?: SortOrderInput | SortOrder
+    user_id?: SortOrder
     _count?: CourseCountOrderByAggregateInput
     _avg?: CourseAvgOrderByAggregateInput
     _max?: CourseMaxOrderByAggregateInput
@@ -19050,6 +19072,7 @@ export namespace Prisma {
     score_statistics_id?: IntNullableWithAggregatesFilter<"Course"> | number | null
     points_possible?: IntNullableWithAggregatesFilter<"Course"> | number | null
     weight?: IntNullableWithAggregatesFilter<"Course"> | number | null
+    user_id?: IntWithAggregatesFilter<"Course"> | number
   }
 
   export type AssignmentGroupWhereInput = {
@@ -20188,6 +20211,7 @@ export namespace Prisma {
     public_description?: string | null
     points_possible?: number | null
     weight?: number | null
+    user_id: number
     assignment_groups?: AssignmentGroupCreateNestedManyWithoutCourseInput
     date_statistics?: DateStatisticsCreateNestedOneWithoutCourseInput
     score_statistics?: ScoreStatisticCreateNestedOneWithoutCourseInput
@@ -20206,6 +20230,7 @@ export namespace Prisma {
     score_statistics_id?: number | null
     points_possible?: number | null
     weight?: number | null
+    user_id: number
     assignment_groups?: AssignmentGroupUncheckedCreateNestedManyWithoutCourseInput
   }
 
@@ -20220,6 +20245,7 @@ export namespace Prisma {
     public_description?: NullableStringFieldUpdateOperationsInput | string | null
     points_possible?: NullableIntFieldUpdateOperationsInput | number | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
+    user_id?: IntFieldUpdateOperationsInput | number
     assignment_groups?: AssignmentGroupUpdateManyWithoutCourseNestedInput
     date_statistics?: DateStatisticsUpdateOneWithoutCourseNestedInput
     score_statistics?: ScoreStatisticUpdateOneWithoutCourseNestedInput
@@ -20238,6 +20264,7 @@ export namespace Prisma {
     score_statistics_id?: NullableIntFieldUpdateOperationsInput | number | null
     points_possible?: NullableIntFieldUpdateOperationsInput | number | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
+    user_id?: IntFieldUpdateOperationsInput | number
     assignment_groups?: AssignmentGroupUncheckedUpdateManyWithoutCourseNestedInput
   }
 
@@ -20254,6 +20281,7 @@ export namespace Prisma {
     score_statistics_id?: number | null
     points_possible?: number | null
     weight?: number | null
+    user_id: number
   }
 
   export type CourseUpdateManyMutationInput = {
@@ -20267,6 +20295,7 @@ export namespace Prisma {
     public_description?: NullableStringFieldUpdateOperationsInput | string | null
     points_possible?: NullableIntFieldUpdateOperationsInput | number | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
+    user_id?: IntFieldUpdateOperationsInput | number
   }
 
   export type CourseUncheckedUpdateManyInput = {
@@ -20282,6 +20311,7 @@ export namespace Prisma {
     score_statistics_id?: NullableIntFieldUpdateOperationsInput | number | null
     points_possible?: NullableIntFieldUpdateOperationsInput | number | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
+    user_id?: IntFieldUpdateOperationsInput | number
   }
 
   export type AssignmentGroupCreateInput = {
@@ -21598,6 +21628,7 @@ export namespace Prisma {
     score_statistics_id?: SortOrder
     points_possible?: SortOrder
     weight?: SortOrder
+    user_id?: SortOrder
   }
 
   export type CourseAvgOrderByAggregateInput = {
@@ -21607,6 +21638,7 @@ export namespace Prisma {
     score_statistics_id?: SortOrder
     points_possible?: SortOrder
     weight?: SortOrder
+    user_id?: SortOrder
   }
 
   export type CourseMaxOrderByAggregateInput = {
@@ -21622,6 +21654,7 @@ export namespace Prisma {
     score_statistics_id?: SortOrder
     points_possible?: SortOrder
     weight?: SortOrder
+    user_id?: SortOrder
   }
 
   export type CourseMinOrderByAggregateInput = {
@@ -21637,6 +21670,7 @@ export namespace Prisma {
     score_statistics_id?: SortOrder
     points_possible?: SortOrder
     weight?: SortOrder
+    user_id?: SortOrder
   }
 
   export type CourseSumOrderByAggregateInput = {
@@ -21646,6 +21680,7 @@ export namespace Prisma {
     score_statistics_id?: SortOrder
     points_possible?: SortOrder
     weight?: SortOrder
+    user_id?: SortOrder
   }
 
   export type IntWithAggregatesFilter<$PrismaModel = never> = {
@@ -24141,6 +24176,7 @@ export namespace Prisma {
     public_description?: string | null
     points_possible?: number | null
     weight?: number | null
+    user_id: number
     date_statistics?: DateStatisticsCreateNestedOneWithoutCourseInput
     score_statistics?: ScoreStatisticCreateNestedOneWithoutCourseInput
   }
@@ -24158,6 +24194,7 @@ export namespace Prisma {
     score_statistics_id?: number | null
     points_possible?: number | null
     weight?: number | null
+    user_id: number
   }
 
   export type CourseCreateOrConnectWithoutAssignment_groupsInput = {
@@ -24319,6 +24356,7 @@ export namespace Prisma {
     public_description?: NullableStringFieldUpdateOperationsInput | string | null
     points_possible?: NullableIntFieldUpdateOperationsInput | number | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
+    user_id?: IntFieldUpdateOperationsInput | number
     date_statistics?: DateStatisticsUpdateOneWithoutCourseNestedInput
     score_statistics?: ScoreStatisticUpdateOneWithoutCourseNestedInput
   }
@@ -24336,6 +24374,7 @@ export namespace Prisma {
     score_statistics_id?: NullableIntFieldUpdateOperationsInput | number | null
     points_possible?: NullableIntFieldUpdateOperationsInput | number | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
+    user_id?: IntFieldUpdateOperationsInput | number
   }
 
   export type AssignmentUpsertWithWhereUniqueWithoutAssignment_groupInput = {
@@ -25948,6 +25987,7 @@ export namespace Prisma {
     public_description?: string | null
     points_possible?: number | null
     weight?: number | null
+    user_id: number
     assignment_groups?: AssignmentGroupCreateNestedManyWithoutCourseInput
     score_statistics?: ScoreStatisticCreateNestedOneWithoutCourseInput
   }
@@ -25964,6 +26004,7 @@ export namespace Prisma {
     score_statistics_id?: number | null
     points_possible?: number | null
     weight?: number | null
+    user_id: number
     assignment_groups?: AssignmentGroupUncheckedCreateNestedManyWithoutCourseInput
   }
 
@@ -26021,6 +26062,7 @@ export namespace Prisma {
     public_description?: NullableStringFieldUpdateOperationsInput | string | null
     points_possible?: NullableIntFieldUpdateOperationsInput | number | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
+    user_id?: IntFieldUpdateOperationsInput | number
     assignment_groups?: AssignmentGroupUpdateManyWithoutCourseNestedInput
     score_statistics?: ScoreStatisticUpdateOneWithoutCourseNestedInput
   }
@@ -26037,6 +26079,7 @@ export namespace Prisma {
     score_statistics_id?: NullableIntFieldUpdateOperationsInput | number | null
     points_possible?: NullableIntFieldUpdateOperationsInput | number | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
+    user_id?: IntFieldUpdateOperationsInput | number
     assignment_groups?: AssignmentGroupUncheckedUpdateManyWithoutCourseNestedInput
   }
 
@@ -26084,6 +26127,7 @@ export namespace Prisma {
     public_description?: string | null
     points_possible?: number | null
     weight?: number | null
+    user_id: number
     assignment_groups?: AssignmentGroupCreateNestedManyWithoutCourseInput
     date_statistics?: DateStatisticsCreateNestedOneWithoutCourseInput
   }
@@ -26100,6 +26144,7 @@ export namespace Prisma {
     date_statistics_id?: number | null
     points_possible?: number | null
     weight?: number | null
+    user_id: number
     assignment_groups?: AssignmentGroupUncheckedCreateNestedManyWithoutCourseInput
   }
 
@@ -26230,6 +26275,7 @@ export namespace Prisma {
     public_description?: NullableStringFieldUpdateOperationsInput | string | null
     points_possible?: NullableIntFieldUpdateOperationsInput | number | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
+    user_id?: IntFieldUpdateOperationsInput | number
     assignment_groups?: AssignmentGroupUpdateManyWithoutCourseNestedInput
     date_statistics?: DateStatisticsUpdateOneWithoutCourseNestedInput
   }
@@ -26246,6 +26292,7 @@ export namespace Prisma {
     date_statistics_id?: NullableIntFieldUpdateOperationsInput | number | null
     points_possible?: NullableIntFieldUpdateOperationsInput | number | null
     weight?: NullableIntFieldUpdateOperationsInput | number | null
+    user_id?: IntFieldUpdateOperationsInput | number
     assignment_groups?: AssignmentGroupUncheckedUpdateManyWithoutCourseNestedInput
   }
 
